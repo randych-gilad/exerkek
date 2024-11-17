@@ -3,19 +3,19 @@ defmodule ExerkekTest do
   doctest Exerkek
 
   @elixir_track %{
-    "course" => true,
-    "icon_url" => "https://assets.exercism.org/tracks/elixir.svg",
-    "is_new" => false,
-    "last_touched_at" => nil,
-    "links" => %{
-      "concepts" => "https://exercism.org/tracks/elixir/concepts",
-      "exercises" => "https://exercism.org/tracks/elixir/exercises",
-      "self" => "https://exercism.org/tracks/elixir"
+    course: true,
+    icon_url: "https://assets.exercism.org/tracks/elixir.svg",
+    is_new: false,
+    last_touched_at: nil,
+    links: %{
+      self: "https://exercism.org/tracks/elixir",
+      exercises: "https://exercism.org/tracks/elixir/exercises",
+      concepts: "https://exercism.org/tracks/elixir/concepts"
     },
-    "num_concepts" => 57,
-    "num_exercises" => 159,
-    "slug" => "elixir",
-    "tags" => [
+    num_concepts: 57,
+    num_exercises: 159,
+    slug: "elixir",
+    tags: [
       "Compiled",
       "Functional",
       "Linux",
@@ -29,19 +29,12 @@ defmodule ExerkekTest do
       "Financial systems",
       "Web development"
     ],
-    "title" => "Elixir",
-    "web_url" => "https://exercism.org/tracks/elixir"
+    title: "Elixir",
+    web_url: "https://exercism.org/tracks/elixir"
   }
 
-  defp decode_to_only do
-    File.read!("test/tracks.json")
-    |> Jason.decode!()
-    |> Map.get("tracks")
-    |> Enum.filter(fn map -> map["title"] == "Elixir" end)
-  end
-
   test "able to get only Elixir track information" do
-    with tracks_json <- decode_to_only() do
+    with tracks_json <- Exerkek.decode_to_only(File.read!("test/tracks.json")) do
       assert hd(tracks_json) == @elixir_track
     end
   end
