@@ -1,7 +1,7 @@
 defmodule Exerkek do
   @api_url "https://api.exercism.io/v2"
 
-  defp decode_to_only() do
+  defp decode_to_only do
     with {:ok, %HTTPoison.Response{body: body}} <- HTTPoison.get(@api_url <> "/tracks") do
       body
       |> Jason.decode!()

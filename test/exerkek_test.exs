@@ -33,12 +33,15 @@ defmodule ExerkekTest do
     "web_url" => "https://exercism.org/tracks/elixir"
   }
 
+  defp decode_to_only do
+    File.read!("test/tracks.json")
+    |> Jason.decode!()
+    |> Map.get("tracks")
+    |> Enum.filter(fn map -> map["title"] == "Elixir" end)
+  end
+
   test "able to get only Elixir track information" do
-    with tracks_json <-
-           File.read!("test/tracks.json")
-           |> Jason.decode!()
-           |> Map.get("tracks")
-           |> Enum.filter(fn map -> map["title"] == "Elixir" end) do
+    with tracks_json <- decode_to_only() do
       assert hd(tracks_json) == @elixir_track
     end
   end
