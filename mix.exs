@@ -23,7 +23,8 @@ defmodule Exerkek.MixProject do
   defp deps do
     [
       {:jason, "~> 1.4"},
-      {:httpoison, "~> 2.0"}
+      {:httpoison, "~> 2.0"},
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
   end
 

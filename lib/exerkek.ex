@@ -1,4 +1,7 @@
 defmodule Exerkek do
+  @moduledoc """
+  Exerkek
+  """
   @api_url "https://api.exercism.io/v2"
 
   defp filter_elixir_track(parseable) do
@@ -14,10 +17,8 @@ defmodule Exerkek do
   end
 
   def decode_to_only(parseable) do
-    with {:ok, %HTTPoison.Response{body: body}} <- parseable do
-      body
-      |> filter_elixir_track()
-    else
+    case parseable do
+      {:ok, %HTTPoison.Response{body: body}} -> body |> filter_elixir_track()
       error -> {:error, error}
     end
   end
